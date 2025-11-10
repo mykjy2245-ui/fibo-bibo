@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+
+// 피보나치 수열 (재귀 함수)
+int fibonacci_recursive(int n) {
+    if (n <= 1) return n; 
+    return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2);
+}
+
+// 피보나치 수열 (메모이제이션)
+int fiboMemo[1000]; 
+
+int fibonacci_memo(int n) {
+    if (n <= 1) return n;
+    if (fiboMemo[n] != 0) return fiboMemo[n]; 
+    return fiboMemo[n] = fibonacci_memo(n - 1) + fibonacci_memo(n - 2);
+}
+
+// 이항 계수 nCk (재귀 함수)
+
+int binomial_recursive(int n, int k) {
+    if (k == 0 || k == n) return 1;
+    return binomial_recursive(n - 1, k - 1) + binomial_recursive(n - 1, k);
+}
+
+// 이항 계수 nCk (메모이제이션)
+int binoMemo[1000][1000];
+
+int binomial_memo(int n, int k) {
+    if (k == 0 || k == n) return 1;
+    if (binoMemo[n][k] != 0) return binoMemo[n][k];
+    return binoMemo[n][k] = binomial_memo(n - 1, k - 1) + binomial_memo(n - 1, k);
+}
+
+// main 함수10
+int main() {
+    int n, k;
+    cout << "피보나치 수열 n 입력: ";
+    cin >> n;
+
+    cout << "[재귀] Fibonacci(" << n << ") = " << fibonacci_recursive(n) << endl;
+    cout << "[메모이제이션] Fibonacci(" << n << ") = " << fibonacci_memo(n) << endl;
+
+    cout << "\n이항계수 n, k 입력: ";
+    cin >> n >> k;
+
+    cout << "[재귀] C(" << n << ", " << k << ") = " << binomial_recursive(n, k) << endl;
+    cout << "[메모이제이션] C(" << n << ", " << k << ") = " << binomial_memo(n, k) << endl;
+
+    return 0;
+}
